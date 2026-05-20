@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BrewHouse — Premium Coffee Experience</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- ░░░ LOADING SCREEN ░░░ -->
+    <div id="loader">
+      <div class="loader-inner">
+        <div class="loader-logo">☕</div>
+        <div class="loader-text">BrewHouse</div>
+        <div class="loader-bar"><div class="loader-fill"></div></div>
+      </div>
+    </div>
+
+    <!-- ░░░ TOAST CONTAINER ░░░ -->
+    <div id="toast-container"></div>
+
+    <!-- ░░░ NAVBAR ░░░ -->
+    <nav id="navbar">
+      <div class="nav-inner">
+        <a class="nav-logo" href="#">☕ <span>BrewHouse</span></a>
+
+        <div class="nav-search">
+          <i class="fas fa-search"></i>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search drinks…"
+            autocomplete="off"
+          />
+          <div id="search-dropdown" class="search-dropdown hidden"></div>
+        </div>
+
+        <div class="nav-actions">
+          <button class="btn-icon" id="theme-toggle" title="Toggle theme">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button
+            class="btn-icon wishlist-btn"
+            id="wishlist-nav-btn"
+            title="Wishlist"
+          >
+            <i class="fas fa-heart"></i>
+            <span class="badge" id="wishlist-count">0</span>
+          </button>
+          <button class="btn-icon cart-btn" id="cart-toggle" title="Cart">
+            <i class="fas fa-shopping-bag"></i>
+            <span class="badge" id="cart-count">0</span>
+          </button>
+          <button class="btn-icon mobile-menu-btn" id="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile nav links -->
+      <div class="mobile-nav" id="mobile-nav">
+        <a href="#categories">Categories</a>
+        <a href="#products">Menu</a>
+        <a href="#footer">Contact</a>
+      </div>
+    </nav>
+
+    <!-- ░░░ HERO BANNER ░░░ -->
+    <section id="hero">
+      <div class="hero-slides" id="hero-slides">
+        <div
+          class="slide active"
+          style="
+            --slide-bg: linear-gradient(
+              135deg,
+              #1a0a0a 0%,
+              #3d1212 50%,
+              #1a0a0a 100%
+            );
+          "
+        >
+          <div class="slide-content">
+            <div class="slide-badge">🔥 Limited Offer</div>
+            <h1>Black Friday<br /><span>Coffee Deals</span></h1>
+            <p>
+              Up to <strong>40% OFF</strong> on all espresso blends today only
+            </p>
+            <a href="#products" class="btn-primary"
+              >Order Now <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+          <div class="slide-visual">☕</div>
+        </div>
+        <div
+          class="slide"
+          style="
+            --slide-bg: linear-gradient(
+              135deg,
+              #0a1a0a 0%,
+              #1a3a1a 50%,
+              #0a1a0a 100%
+            );
+          "
+        >
+          <div class="slide-content">
+            <div class="slide-badge">🌿 New Arrivals</div>
+            <h1>Matcha &amp;<br /><span>Cold Brew</span></h1>
+            <p>Fresh summer collection — chilled to perfection</p>
+            <a href="#products" class="btn-primary"
+              >Explore <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+          <div class="slide-visual">🧋</div>
+        </div>
+        <div
+          class="slide"
+          style="
+            --slide-bg: linear-gradient(
+              135deg,
+              #1a1a0a 0%,
+              #3a3a12 50%,
+              #1a1a0a 100%
+            );
+          "
+        >
+          <div class="slide-content">
+            <div class="slide-badge">⭐ Best Seller</div>
+            <h1>Signature<br /><span>Caramel Latte</span></h1>
+            <p>The drink everyone is talking about — try it today</p>
+            <a href="#products" class="btn-primary"
+              >Try Now <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+          <div class="slide-visual">🍮</div>
+        </div>
+      </div>
+      <div class="slide-dots" id="slide-dots"></div>
+      <button class="slide-nav prev" id="slide-prev">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="slide-nav next" id="slide-next">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </section>
+
+    <!-- ░░░ CATEGORIES ░░░ -->
+    <section id="categories">
+      <div class="container">
+        <div class="section-header">
+          <h2>Browse by Category</h2>
+          <p>Find your perfect brew</p>
+        </div>
+        <div class="category-grid">
+          <button class="cat-card active" data-cat="all">
+            <span class="cat-icon">🍽️</span>
+            <span>All Drinks</span>
+          </button>
+          <button class="cat-card" data-cat="hot">
+            <span class="cat-icon">☕</span>
+            <span>Hot Coffee</span>
+          </button>
+          <button class="cat-card" data-cat="iced">
+            <span class="cat-icon">🧊</span>
+            <span>Iced Coffee</span>
+          </button>
+          <button class="cat-card" data-cat="noncoffee">
+            <span class="cat-icon">🍵</span>
+            <span>Non Coffee</span>
+          </button>
+          <button class="cat-card" data-cat="bottled">
+            <span class="cat-icon">🍶</span>
+            <span>Bottled</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░░ PRODUCTS ░░░ -->
+    <section id="products">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="products-title">Our Menu</h2>
+          <p>Crafted with love and quality beans</p>
+        </div>
+        <div class="product-grid" id="product-grid">
+          <!-- Products injected by JS -->
+        </div>
+        <div class="no-results hidden" id="no-results">
+          <div style="font-size: 3rem">☕</div>
+          <p>No drinks found. Try another search!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░░ CART SIDEBAR ░░░ -->
+    <div class="overlay" id="overlay"></div>
+    <aside class="cart-sidebar" id="cart-sidebar">
+      <div class="cart-header">
+        <h3>🛒 Your Cart</h3>
+        <button class="btn-icon" id="cart-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="cart-items" id="cart-items">
+        <div class="cart-empty" id="cart-empty">
+          <div style="font-size: 3rem">🛒</div>
+          <p>Your cart is empty</p>
+        </div>
+      </div>
+      <div class="cart-footer" id="cart-footer">
+        <div class="cart-total">
+          <span>Total</span>
+          <span id="cart-total-price">Rp 0</span>
+        </div>
+        <button class="btn-primary full-width" id="checkout-btn">
+          Checkout <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ░░░ PRODUCT DETAIL MODAL ░░░ -->
+    <div class="modal-overlay" id="product-modal-overlay">
+      <div class="modal product-modal" id="product-modal">
+        <button class="modal-close" id="product-modal-close">
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="modal-content" id="product-modal-content"></div>
+      </div>
+    </div>
+
+    <!-- ░░░ CHECKOUT MODAL ░░░ -->
+    <div class="modal-overlay" id="checkout-modal-overlay">
+      <div class="modal checkout-modal" id="checkout-modal">
+        <button class="modal-close" id="checkout-modal-close">
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="modal-body">
+          <h2>🧾 Checkout</h2>
+          <div class="checkout-summary" id="checkout-summary"></div>
+
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="co-name" placeholder="e.g. Budi Santoso" />
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="co-phone" placeholder="e.g. 08123456789" />
+          </div>
+          <div class="form-group">
+            <label>Delivery Address</label>
+            <textarea
+              id="co-address"
+              placeholder="Your full address…"
+              rows="2"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label>Order Notes (optional)</label>
+            <textarea
+              id="co-notes"
+              placeholder="Extra sweet, less ice…"
+              rows="2"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Payment Method</label>
+            <div class="payment-methods" id="payment-methods">
+              <label class="payment-card"
+                ><input type="radio" name="payment" value="Cash" /><span
+                  >💵 Cash</span
+                ></label
+              >
+              <label class="payment-card"
+                ><input type="radio" name="payment" value="QRIS" /><span
+                  >📱 QRIS</span
+                ></label
+              >
+              <label class="payment-card"
+                ><input type="radio" name="payment" value="DANA" /><span
+                  >💙 DANA</span
+                ></label
+              >
+              <label class="payment-card"
+                ><input type="radio" name="payment" value="GoPay" /><span
+                  >💚 GoPay</span
+                ></label
+              >
+            </div>
+          </div>
+
+          <button class="btn-primary full-width" id="pay-btn">
+            Pay Now <i class="fas fa-lock"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ░░░ SUCCESS MODAL ░░░ -->
+    <div class="modal-overlay" id="success-modal-overlay">
+      <div class="modal success-modal" id="success-modal">
+        <div class="success-anim">
+          <div class="success-circle">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+        <h2>Payment Successful!</h2>
+        <p id="success-msg">
+          Your order has been placed and will be prepared shortly.
+        </p>
+        <button class="btn-primary" id="wa-btn">
+          <i class="fab fa-whatsapp"></i> Confirm via WhatsApp
+        </button>
+        <button class="btn-outline" id="success-close">
+          Continue Shopping
+        </button>
+      </div>
+    </div>
+
+    <!-- ░░░ WISHLIST MODAL ░░░ -->
+    <div class="modal-overlay" id="wishlist-modal-overlay">
+      <div class="modal wishlist-modal" id="wishlist-modal">
+        <button class="modal-close" id="wishlist-modal-close">
+          <i class="fas fa-times"></i>
+        </button>
+        <h2>❤️ My Wishlist</h2>
+        <div class="wishlist-grid" id="wishlist-grid"></div>
+      </div>
+    </div>
+
+    <!-- ░░░ FOOTER ░░░ -->
+    <footer id="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="footer-logo">☕ BrewHouse</div>
+            <p>
+              Your neighborhood premium coffee destination, serving quality
+              brews since 2018.
+            </p>
+            <div class="social-links">
+              <a href="#" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+              <a href="#" aria-label="Facebook"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href="#" aria-label="WhatsApp"
+                ><i class="fab fa-whatsapp"></i
+              ></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>📍 Find Us</h4>
+            <p>
+              Jl. Imam Bonjol No. 12<br />Medan, Sumatera Utara<br />Indonesia
+              20152
+            </p>
+          </div>
+          <div class="footer-col">
+            <h4>🕐 Hours</h4>
+            <p>
+              Mon – Fri: 07:00 – 22:00<br />Sat – Sun: 08:00 – 23:00<br />Public
+              Holidays: 09:00 – 21:00
+            </p>
+          </div>
+          <div class="footer-col">
+            <h4>📞 Contact</h4>
+            <p>
+              <a href="tel:+6261123456">+62 61 123456</a><br /><a
+                href="mailto:hello@brewhouse.id"
+                >hello@brewhouse.id</a
+              >
+            </p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2024 BrewHouse. All rights reserved.</p>
+          <p>Made with ❤️ &amp; ☕</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
